@@ -1,4 +1,6 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Exclude } from 'class-transformer';
+import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from '../auth/user.enity';
 import { TaskStatus } from './task.status.enum';
 
 @Entity('tasks')
@@ -20,4 +22,8 @@ export class Task extends BaseEntity {
     type: 'varchar',
   })
   status: TaskStatus;
+
+  @ManyToOne((_type) => User, (user) => user.tasks, {eager: false})
+  @Exclude({toPlainOnly: true})
+  user:User;
 }

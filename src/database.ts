@@ -1,5 +1,7 @@
 import { join } from 'path';
 import { DataSource } from 'typeorm';
+import { User } from './module/auth/user.enity';
+import { Task } from './module/task/task.entity';
 
 export const dataSource = new DataSource({
   type: 'postgres',
@@ -9,7 +11,7 @@ export const dataSource = new DataSource({
   password: '0926',
   database: 'nest',
   synchronize: true,
-  entities: [join(__dirname, '**', '*.entity.{ts,js}')]
+  entities: [Task,User],
 });
 
 dataSource
